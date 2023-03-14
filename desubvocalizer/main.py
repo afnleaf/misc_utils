@@ -6,7 +6,8 @@ import re
 
 # FILENAME = 'README.md'
 # FILENAME = 'transformer.md'
-FILENAME = 'article.md'
+#FILENAME = 'article.md'
+FILENAME = 'heuristic.md'
 size = os.get_terminal_size()
 MAX_WORD_SIZE = size[1]
 
