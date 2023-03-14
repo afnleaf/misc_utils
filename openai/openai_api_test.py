@@ -1,7 +1,6 @@
 import openai
-import config
+from config import *
 
-# openai.api_key = "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"
 openai.api_key = API_KEY
 
 def getMessage(prompt):

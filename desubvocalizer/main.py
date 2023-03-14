@@ -5,13 +5,14 @@ import re
 
 
 # FILENAME = 'README.md'
-FILENAME = 'transformer.md'
+# FILENAME = 'transformer.md'
+FILENAME = 'article.md'
 size = os.get_terminal_size()
 MAX_WORD_SIZE = size[1]
 
 
 def parse_file_to_clean_html(file_name):
-    with open(file_name, 'r') as file:
+    with open(file_name, 'r', encoding='utf8') as file:
         file_text = file.read()
         #html_text = markdown.markdown(data)
         return file_text
@@ -59,7 +60,8 @@ def print_out_document(document):
         #time.sleep(sleep_time_dict[sleep_time])
         # mean time of words in any language is 68ms
         sleep_time = len(word) * 0.068
-        sleep_time = 0.5 if sleep_time < 0.1
+        if sleep_time < 0.1:
+            sleep_time = 0.5
         time.sleep(sleep_time)
         
 

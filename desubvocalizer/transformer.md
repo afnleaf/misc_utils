@@ -26,7 +26,7 @@ from a dearth of annotated resources [61]. In these situations, models that can 
 information from unlabeled data provide a valuable alternative to gathering more annotation, which
 can be time-consuming and expensive. Further, even in cases where considerable supervision
 is available, learning good representations in an unsupervised fashion can provide a significant
-performance boost. The most compelling evidence for this so far has been the extensive use of pretrained word embeddings [10, 39, 42] to improve performance on a range of NLP tasks [8, 11, 26, 45].
+performance boost. The most compelling evidence for this so far has been the extensive use of pretrained word embeddings [10, 39, 42] to improve performance on a range of NLP tasks [8, 11, 26, 45].
 
 Leveraging more than word-level information from unlabeled text, however, is challenging for two
 main reasons. First, it is unclear what type of optimization objectives are most effective at learning
