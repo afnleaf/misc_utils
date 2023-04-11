@@ -1,9 +1,12 @@
 // Imports
 use std::fs::File;
 use std::io::Read;
-use std::{thread, time};
 use term_size::dimensions;
 use regex::Regex;
+use std::thread;
+use std::time::Duration;
+use std::io::{self, Write};
+
 
 // &str type is string slice
 const FILENAME: &str = "testfile.md";
@@ -16,7 +19,7 @@ fn parse_file_to_clean_html(file_name: &str) -> String {
     file_text
 }
 
-// what
+
 fn turn_into_document(file_text: &str) -> Vec<String> {
     let mut document = Vec::new();
     let lines = file_text.split('\n');
@@ -40,36 +43,35 @@ fn turn_into_document(file_text: &str) -> Vec<String> {
     document
 }
 
-// what
+
 fn print_out_document(document: Vec<String>, max_word_size: usize) {
     let mut max_word_length = max_word_size;
-    //let sleep_time_dict = [(0, 180), (1, 500)];
     let mut sleep_time: u64;
+    // to flush output
+    let stdout = io::stdout();
+    let mut handle = stdout.lock();
 
     for word in document {
-        
         if word.len() > max_word_length {
             max_word_length = word.len();
         }
 
-        //print!("\r{}{}", " ".repeat(max_word_length), "\r");
+        print!("\r{}{}", " ".repeat(max_word_length), "\r");
         if word != "\n" {
-            //print!("\r{}\n", word);
-            println!("\r{}", word);
+            write!(handle, "\r{}", word).unwrap();
+            handle.flush().unwrap();
         }
         
         sleep_time = word.len() as u64 * 68;
-        if sleep_time < 100 {
+        if sleep_time < 500 {
             sleep_time = 500;
         }
-        //print!("{}", sleep_time);
-        //thread::sleep(time::Duration::from_secs_f64(sleep_time));
-        thread::sleep(time::Duration::from_millis(sleep_time));
-        
+
+        thread::sleep(Duration::from_millis(sleep_time));        
     }
 }
 
-// what
+
 fn main() {
     let file_text = parse_file_to_clean_html(FILENAME);
     let document = turn_into_document(&file_text);
